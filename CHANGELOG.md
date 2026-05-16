@@ -5,6 +5,12 @@ All notable changes to **MCP-Dockhand** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0](https://github.com/strausmann/mcp-dockhand/compare/v1.3.0...v1.4.0) (2026-05-16)
+
+### Features
+
+* **ci:** publish multi-arch (amd64 + arm64) Docker images on release ([#59](https://github.com/strausmann/mcp-dockhand/issues/59)) ([7390d6a](https://github.com/strausmann/mcp-dockhand/commit/7390d6af9b74cb32e545ec5d42ac58376b21b081)), closes [#54](https://github.com/strausmann/mcp-dockhand/issues/54) [#54](https://github.com/strausmann/mcp-dockhand/issues/54)
+
 ## [1.3.0](https://github.com/strausmann/mcp-dockhand/compare/v1.2.0...v1.3.0) (2026-05-16)
 
 ### Features
