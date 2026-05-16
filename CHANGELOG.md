@@ -5,6 +5,12 @@ All notable changes to **MCP-Dockhand** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0](https://github.com/strausmann/mcp-dockhand/compare/v1.4.0...v1.5.0) (2026-05-16)
+
+### Features
+
+* **tools:** audit and expand all 222 MCP tool descriptions for AI disambiguation ([#63](https://github.com/strausmann/mcp-dockhand/issues/63)) ([b337e4c](https://github.com/strausmann/mcp-dockhand/commit/b337e4c05adb4087d4683d610832ad6504b7d59e)), closes [#60](https://github.com/strausmann/mcp-dockhand/issues/60) [#58](https://github.com/strausmann/mcp-dockhand/issues/58)
+
 ## [1.4.0](https://github.com/strausmann/mcp-dockhand/compare/v1.3.0...v1.4.0) (2026-05-16)
 
 ### Features
