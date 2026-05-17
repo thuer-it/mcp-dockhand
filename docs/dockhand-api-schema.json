@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-04-20T05:52:39.405Z",
+  "generatedAt": "2026-05-17T06:06:11.321Z",
   "sourceRepo": "finsys/dockhand",
-  "sourceCommit": "ccfda4c054c806fb74c99586b36c3c14fb46113a",
-  "endpointCount": 196,
+  "sourceCommit": "e7100f892672842d1d6d791f7799c15e179f7f25",
+  "endpointCount": 197,
   "endpoints": [
     {
       "path": "/api/activity",
@@ -996,6 +996,13 @@
       ],
       "pathParams": [
         "id"
+      ]
+    },
+    {
+      "path": "/api/labels",
+      "methods": [
+        "GET",
+        "POST"
       ]
     },
     {
