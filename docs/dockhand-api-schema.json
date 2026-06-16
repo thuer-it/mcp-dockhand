@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-05-31T06:29:22.706Z",
+  "generatedAt": "2026-06-16T06:48:35.770Z",
   "sourceRepo": "finsys/dockhand",
-  "sourceCommit": "00bd09df551e0251dfd59d674bae22498b38aba2",
-  "endpointCount": 197,
+  "sourceCommit": "83c3a5ea0924eccaec58d432f58b6f931c5648fa",
+  "endpointCount": 199,
   "endpoints": [
     {
       "path": "/api/activity",
@@ -511,6 +511,15 @@
     },
     {
       "path": "/api/containers/{id}/update",
+      "methods": [
+        "POST"
+      ],
+      "pathParams": [
+        "id"
+      ]
+    },
+    {
+      "path": "/api/containers/{id}/update-runtime",
       "methods": [
         "POST"
       ],
@@ -1235,6 +1244,12 @@
       ],
       "pathParams": [
         "id"
+      ]
+    },
+    {
+      "path": "/api/registries/test",
+      "methods": [
+        "POST"
       ]
     },
     {
