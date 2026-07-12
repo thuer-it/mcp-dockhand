@@ -46,7 +46,7 @@ export function registerStackTools(server: McpServer, client: DockhandClient): v
       name: z.string().describe('Stack name'),
     },
     async ({ environmentId, name }) => {
-      return jsonResponse(await client.postSSE(`/api/stacks/${encodePath(name)}/start`, undefined, { env: environmentId }));
+      return jsonResponse(await client.postSSE(`/api/stacks/${encodePath(name)}/start`, {}, { env: environmentId }));
     }
   );
 
@@ -56,7 +56,7 @@ export function registerStackTools(server: McpServer, client: DockhandClient): v
       name: z.string().describe('Stack name'),
     },
     async ({ environmentId, name }) => {
-      return jsonResponse(await client.postSSE(`/api/stacks/${encodePath(name)}/stop`, undefined, { env: environmentId }));
+      return jsonResponse(await client.postSSE(`/api/stacks/${encodePath(name)}/stop`, {}, { env: environmentId }));
     }
   );
 
@@ -66,7 +66,7 @@ export function registerStackTools(server: McpServer, client: DockhandClient): v
       name: z.string().describe('Stack name'),
     },
     async ({ environmentId, name }) => {
-      return jsonResponse(await client.postSSE(`/api/stacks/${encodePath(name)}/restart`, undefined, { env: environmentId }));
+      return jsonResponse(await client.postSSE(`/api/stacks/${encodePath(name)}/restart`, {}, { env: environmentId }));
     }
   );
 
@@ -77,7 +77,7 @@ export function registerStackTools(server: McpServer, client: DockhandClient): v
       removeVolumes: z.boolean().optional().describe('Also remove volumes (default: false)'),
     },
     async ({ environmentId, name, removeVolumes }) => {
-      const body = removeVolumes !== undefined ? { removeVolumes } : undefined;
+      const body = removeVolumes !== undefined ? { removeVolumes } : {};
       return jsonResponse(await client.postSSE(`/api/stacks/${encodePath(name)}/down`, body, { env: environmentId }));
     }
   );
@@ -271,7 +271,7 @@ export function registerStackTools(server: McpServer, client: DockhandClient): v
       name: z.string().describe('Stack name'),
     },
     async ({ environmentId, name }) => {
-      return jsonResponse(await client.postSSE(`/api/stacks/${encodePath(name)}/deploy`, undefined, { env: environmentId }));
+      return jsonResponse(await client.postSSE(`/api/stacks/${encodePath(name)}/deploy`, {}, { env: environmentId }));
     }
   );
 }

@@ -27,7 +27,7 @@ export function registerGitStackTools(server: McpServer, client: DockhandClient)
   registerTool(server, 'deploy_git_stack', 'Perform a full deploy of a Git-based stack — pulls the latest commit and redeploys all services via a streaming SSE pipeline; use `sync_git_stack` instead to pull remote changes without triggering a full redeploy.',
     { stackId: z.number().describe('Git stack ID') },
     async ({ stackId }) => {
-      return jsonResponse(await client.postSSE(`/api/git/stacks/${encodePath(stackId)}/deploy`));
+      return jsonResponse(await client.postSSE(`/api/git/stacks/${encodePath(stackId)}/deploy`, {}));
     }
   );
 
@@ -178,7 +178,7 @@ export function registerGitStackTools(server: McpServer, client: DockhandClient)
   registerTool(server, 'deploy_git_repository', 'Perform a full deploy of a saved Git repository — pulls the latest commit and redeploys all services via a streaming SSE pipeline; use `sync_git_repository` to pull remote changes without triggering a full redeploy.',
     { repositoryId: z.number().describe('Repository ID') },
     async ({ repositoryId }) => {
-      return jsonResponse(await client.postSSE(`/api/git/repositories/${encodePath(repositoryId)}/deploy`));
+      return jsonResponse(await client.postSSE(`/api/git/repositories/${encodePath(repositoryId)}/deploy`, {}));
     }
   );
 
@@ -246,7 +246,7 @@ export function registerGitStackTools(server: McpServer, client: DockhandClient)
   registerTool(server, 'deploy_git_stack_stream', 'Streaming variant of `deploy_git_stack` — performs a full Git pull + redeploy and emits progress via Server-Sent Events; use this when you want to surface live deploy logs, otherwise the plain `deploy_git_stack` returns the same end state without the stream.',
     { stackId: z.number().describe('Git stack ID') },
     async ({ stackId }) => {
-      return jsonResponse(await client.postSSE(`/api/git/stacks/${encodePath(stackId)}/deploy-stream`));
+      return jsonResponse(await client.postSSE(`/api/git/stacks/${encodePath(stackId)}/deploy-stream`, {}));
     }
   );
 
