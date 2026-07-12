@@ -38,7 +38,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npx semantic-release > release_output.txt 2>&1
+          npx semantic-release > release_output.txt 2>&1 || true
           cat release_output.txt
 
           if grep -q "Published release" release_output.txt; then
