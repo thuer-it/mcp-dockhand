@@ -5,6 +5,12 @@ All notable changes to **MCP-Dockhand** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1](https://github.com/thuer-it/mcp-dockhand/compare/v1.0.0...v1.0.1) (2026-07-12)
+
+### Bug Fixes
+
+* **release:** don't let 'set -e' swallow semantic-release's own error output ([9295e52](https://github.com/thuer-it/mcp-dockhand/commit/9295e52eb7cbdf65e68f05d7bf90e918e9983df2))
+
 ## 1.0.0 (2026-07-12)
 
 ### Features
