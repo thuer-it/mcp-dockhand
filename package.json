@@ -27,7 +27,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/strausmann/mcp-dockhand.git"
+    "url": "https://github.com/thuer-it/mcp-dockhand.git"
   },
   "engines": {
     "node": ">=22.0.0"
