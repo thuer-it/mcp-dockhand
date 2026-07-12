@@ -30,10 +30,25 @@ export interface ServerConfig {
   host?: string;
 }
 
-interface SessionEntry {
+export interface SessionEntry {
   server: McpServer;
   transport: StreamableHTTPServerTransport;
   lastActivity: number;
+  /**
+   * Serializes concurrent POST/DELETE calls against this session's transport.
+   *
+   * Fix: two parallel tool calls on the same MCP session (e.g. list_containers +
+   * list_stacks fired back-to-back by a client) each invoked
+   * transport.handleRequest() concurrently on the *same* StreamableHTTPServerTransport
+   * instance. That corrupted the transport's internal request-routing state, after
+   * which every subsequent call on the session failed with a generic error and the
+   * session never recovered (observed as "Tool execution failed" on all following
+   * calls, including simple sequential ones, until the client disconnected and
+   * reconnected with a fresh session). The GET stream (server->client SSE) is
+   * intentionally left out of this queue since it is long-lived by design and must
+   * stay concurrent with POST request/response cycles.
+   */
+  queue: Promise<void>;
 }
 
 /**
@@ -47,6 +62,22 @@ function createMcpServer(client: DockhandClient): McpServer {
   });
   registerAllTools(server, client);
   return server;
+}
+
+/**
+ * Runs `task` only after all previously enqueued tasks for this session have
+ * settled (success or failure), so at most one handleRequest() call is ever
+ * in flight per session/transport at a time. See SessionEntry.queue.
+ */
+export function runSerialized(entry: SessionEntry, task: () => Promise<void>): Promise<void> {
+  const run = entry.queue.then(task, task);
+  // Keep the queue alive even if `run` rejects, so later requests aren't stuck
+  // behind a permanently-rejected promise.
+  entry.queue = run.then(
+    () => undefined,
+    () => undefined,
+  );
+  return run;
 }
 
 export async function createServer(config: ServerConfig): Promise<void> {
@@ -102,7 +133,9 @@ export async function createServer(config: ServerConfig): Promise<void> {
       if (sessionId && sessions.has(sessionId)) {
         const entry = sessions.get(sessionId)!;
         entry.lastActivity = Date.now();
-        await entry.transport.handleRequest(req, res, req.body);
+        // Serialized: see SessionEntry.queue for why concurrent tool calls on the
+        // same session must not call handleRequest() on the shared transport at once.
+        await runSerialized(entry, () => entry.transport.handleRequest(req, res, req.body));
         return;
       }
 
@@ -110,7 +143,7 @@ export async function createServer(config: ServerConfig): Promise<void> {
       const transport = new StreamableHTTPServerTransport({
         sessionIdGenerator: () => crypto.randomUUID(),
         onsessioninitialized: (id) => {
-          sessions.set(id, { server, transport, lastActivity: Date.now() });
+          sessions.set(id, { server, transport, lastActivity: Date.now(), queue: Promise.resolve() });
           console.error(`[session] New session ${id} (${sessions.size} active)`);
         },
       });
@@ -156,7 +189,7 @@ export async function createServer(config: ServerConfig): Promise<void> {
     }
 
     const entry = sessions.get(sessionId)!;
-    await entry.transport.handleRequest(req, res);
+    await runSerialized(entry, () => entry.transport.handleRequest(req, res));
     removeSession(sessionId);
   });
 
