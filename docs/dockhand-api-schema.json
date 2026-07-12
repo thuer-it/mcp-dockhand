@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-06-17T06:43:20.486Z",
+  "generatedAt": "2026-07-12T06:00:31.777Z",
   "sourceRepo": "finsys/dockhand",
-  "sourceCommit": "efb634701c55f80a8c752df8ae08d88f2c16cce9",
-  "endpointCount": 202,
+  "sourceCommit": "c718ac9a84fd222a4ec0da625d305bad93827937",
+  "endpointCount": 208,
   "endpoints": [
     {
       "path": "/api/activity",
@@ -542,6 +542,7 @@
     {
       "path": "/api/containers/check-updates",
       "methods": [
+        "GET",
         "POST"
       ]
     },
@@ -1003,8 +1004,20 @@
       ]
     },
     {
+      "path": "/api/images/scan/export",
+      "methods": [
+        "GET"
+      ],
+      "queryParams": [
+        "format",
+        "image",
+        "imageId"
+      ]
+    },
+    {
       "path": "/api/jobs/{id}",
       "methods": [
+        "DELETE",
         "GET"
       ],
       "pathParams": [
@@ -1163,6 +1176,14 @@
       ],
       "queryParams": [
         "gridId"
+      ]
+    },
+    {
+      "path": "/api/preferences/sidebar",
+      "methods": [
+        "DELETE",
+        "GET",
+        "POST"
       ]
     },
     {
@@ -1807,6 +1828,33 @@
       ],
       "pathParams": [
         "name"
+      ]
+    },
+    {
+      "path": "/api/vulnerabilities",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "path": "/api/vulnerabilities/count",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "path": "/api/vulnerabilities/export",
+      "methods": [
+        "GET"
+      ],
+      "queryParams": [
+        "format"
+      ]
+    },
+    {
+      "path": "/api/vulnerabilities/scan-all",
+      "methods": [
+        "POST"
       ]
     }
   ]
